@@ -34,8 +34,9 @@ menu.load_data(DATA)
 # x =  menu.build_a_set_of_orders(7)
 # p x[0]
 # p menu.add_up?(x[0])
-x = menu.solve_without_dupes
-x.each do |variant|
-  p variant
-  p "***"
-end
+# x = menu.solve_without_dupes
+# x.each do |variant|
+#   p variant
+#   p "***"
+# end
+menu.pretty_print
