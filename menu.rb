@@ -11,7 +11,7 @@ class Menu
   def load_data(data)
     all_items = []
     data.each do |item|
-      all_items << Item.new({description: item[0], price: item[1]})
+      all_items << Item.new({description: item[0], price: item[1].to_f.round(2)})
     end
     @items = self.sort_by_price(all_items)
   end
@@ -79,10 +79,12 @@ class Menu
     puts '*****'
     array_of_arrays.each do |array_of_objects|
       puts "solution number - #{counter}"
+      puts "------"
       array_of_objects.each do |item|
-        puts "$#{item.price}\t #{item.description}"
+        printf " $%.2f \t #{item.description} \n", item.price
+
       end # end for inner do-loop
-      puts "-----"
+      puts "------"
       puts "$#{TARGET}"
       puts
       counter +=1
