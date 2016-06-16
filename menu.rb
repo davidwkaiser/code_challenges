@@ -73,5 +73,20 @@ class Menu
     return all_solutions.uniq!
   end
 
+  def pretty_print
+    array_of_arrays = solve_without_dupes
+    counter = 1
+    puts '*****'
+    array_of_arrays.each do |array_of_objects|
+      puts "solution number - #{counter}"
+      array_of_objects.each do |item|
+        puts "$#{item.price}\t #{item.description}"
+      end # end for inner do-loop
+      puts "-----"
+      puts "$#{TARGET}"
+      puts
+      counter +=1
+    end  #end for outer do-loop
+  end #end for method
 
 end
