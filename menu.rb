@@ -56,7 +56,7 @@ class Menu
     total_cost_of_order == TARGET
   end
 
-  def solve
+  def solve_with_dupes
     solutions = []
     all_possible_orders = collect_possible_orders
     all_possible_orders.each do |order|
@@ -64,5 +64,14 @@ class Menu
     end
     return solutions
   end
+
+  def solve_without_dupes
+    all_solutions = solve_with_dupes
+    all_solutions.each do |array|
+      sort_by_price(array)
+    end
+    return all_solutions.uniq!
+  end
+
 
 end
