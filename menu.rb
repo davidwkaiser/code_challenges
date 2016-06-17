@@ -1,8 +1,7 @@
 class Menu
   attr_reader :file, :items
 
-  def initialize() #will need to add "file" here later to read CSV
-    #@file = file
+  def initialize()
     @items = []
   end
 
