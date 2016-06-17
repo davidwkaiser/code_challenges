@@ -21,11 +21,15 @@ class Menu
     end
   end
 
+  #takes the first line, sets as target amount, removes that line
+  #so that the remainder is just menu items
   def set_target(raw_data_array)
     target_string = raw_data_array.shift
     $target = target_string.to_f
   end
 
+  #menu items are converted into objects and
+  #shoveled into an array
   def load_data(menu_data_array)
     all_items = []
     menu_data_array.each do |item|
@@ -35,6 +39,15 @@ class Menu
     @items = self.sort_by_price(all_items)
   end
 
+  def sort_by_price(array)
+    array.sort!{|a,b| a.price <=> b.price}
+  end
+
+  def sort_by_description(array)
+    array.sort!{|a,b| a.description <=> b.description}
+  end
+
+  #this is the master function to gather data before sorting
   def get_data_from_file(filename)
     data_array = load_file(filename)
     remove_dollar_sign(data_array)
@@ -42,9 +55,6 @@ class Menu
     load_data(data_array)
   end
 
-  def sort_by_price(array)
-    array.sort!{|a,b| a.price <=> b.price}
-  end
 
   def cheapest_item
     return @items[0]
@@ -62,10 +72,13 @@ class Menu
     return ($target / self.cheapest_item.price).floor
   end
 
+  #builds a set of orders with a given number of items
   def build_a_set_of_orders(number_of_items)
     return @items.repeated_permutation(number_of_items).to_a
   end
 
+  #builds a set of orders with numbers ranging from min to max
+  #number of items
   def collect_possible_orders
     possible_orders = []
     for number_of_items in min_number_of_items..max_number_of_items
@@ -74,6 +87,7 @@ class Menu
     return possible_orders
   end
 
+  #tests if an order adds up to the target number, returns boolean
   def add_up?(order)
     total_cost_of_order = 0
     order.each do |item|
@@ -82,6 +96,7 @@ class Menu
     total_cost_of_order == $target
   end
 
+  #generates a complete set of all possible solutions, if any
   def solve_with_dupes
     solutions = []
     all_possible_orders = collect_possible_orders
@@ -91,10 +106,11 @@ class Menu
     return solutions
   end
 
+  #filters out the duplicate answers
   def solve_without_dupes
     all_solutions = solve_with_dupes
     all_solutions.each do |array|
-      sort_by_price(array)
+      sort_by_description(array)
     end
     return all_solutions.uniq!
   end
