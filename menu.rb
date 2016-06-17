@@ -1,5 +1,3 @@
-require 'csv'
-
 class Menu
   attr_reader :file, :items
 
@@ -8,10 +6,33 @@ class Menu
     @items = []
   end
 
-  def load_data(data)
+  def load_file(filename)
+    raw_file_data = []
+    f = File.open(filename, "r")
+    f.each_line do |line|
+      raw_file_data << line.chomp
+    end
+    f.close
+    p raw_file_data
+  end
+
+  def remove_dollar_sign(raw_data_array)
+    raw_data_array.each do |item|
+      item.gsub(/\$/, "")
+    end
+  end
+
+  def set_target(raw_data_array)
+    target_string = raw_data_array.shift
+    $target = target_string.to_f
+    p $target
+  end
+
+  def load_data(menu_data_array)
     all_items = []
-    data.each do |item|
-      all_items << Item.new({description: item[0], price: item[1].to_f.round(2)})
+    menu_data_array.each do |item|
+      item_array = item.split(',')
+      all_items << Item.new({description: item_array[0], price: item_array[1].to_f.round(2)})
     end
     @items = self.sort_by_price(all_items)
   end
@@ -28,12 +49,12 @@ class Menu
     return @items[-1]
   end
 
-  def max_number_of_items
-    return (TARGET / self.cheapest_item.price).floor
+  def min_number_of_items
+    return ($target / self.most_expensive_item.price).ceil
   end
 
-  def min_number_of_items
-    return (TARGET / self.most_expensive_item.price).ceil
+  def max_number_of_items
+    return ($target / self.cheapest_item.price).floor
   end
 
   def build_a_set_of_orders(number_of_items)
@@ -53,7 +74,7 @@ class Menu
     order.each do |item|
       total_cost_of_order += item.price
     end
-    total_cost_of_order == TARGET
+    total_cost_of_order == $target
   end
 
   def solve_with_dupes
@@ -76,7 +97,7 @@ class Menu
   def pretty_print
     array_of_arrays = solve_without_dupes
     unless array_of_arrays
-      printf "There are no solutions that add up to $%.2f \n", TARGET
+      printf "There are no solutions that add up to $%.2f \n", $target
     else
       counter = 1
       puts '*****'
@@ -87,8 +108,8 @@ class Menu
           printf " $%.2f \t #{item.description} \n", item.price
         end # end for inner do-loop
         puts "------"
-        #puts "$#{TARGET}"
-        printf "$%.2f \n", TARGET
+        #puts "$#{$target}"
+        printf "$%.2f \n", $target
         puts
         counter +=1
       end  #end for outer do-loop
