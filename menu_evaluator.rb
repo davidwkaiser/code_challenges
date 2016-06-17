@@ -4,12 +4,12 @@
 
 require_relative "item"
 require_relative "menu"
-TARGET = 0
+$target = 0
 
 # status = false
 # final_order = []
 
-# TARGET = 15.05
+#TARGET = 15.05
 # DATA = [
 # ["mixed fruit", 2.15],
 # ["french fries", 2.75],
@@ -18,8 +18,6 @@ TARGET = 0
 # ["mozzarella sticks", 4.20],
 # ["sampler plate", 5.80],
 # ]
-
-
 
 menu = Menu.new
 #menu.load_data(DATA)
@@ -42,9 +40,12 @@ menu = Menu.new
 #   p "***"
 # end
 
-#menu.pretty_print
-file = "menu.txt"
-menu.load_file(file)
-puts
-menu_item_test = "french fries,$2.75"
-#p menu.remove_dollar_sign(menu_item_test)
+# menu.pretty_print
+# file = "menu.txt"
+# menu.load_file(file)
+# puts
+# menu_item_test = "french fries,$2.75"
+# #p menu.remove_dollar_sign(menu_item_test)
+
+test_me = ["15.05", "mixed fruit,2.15", "french fries,2.75"]
+menu.set_target(test_me)
