@@ -13,19 +13,18 @@ class Menu
       raw_file_data << line.chomp
     end
     f.close
-    p raw_file_data
+    raw_file_data
   end
 
   def remove_dollar_sign(raw_data_array)
     raw_data_array.each do |item|
-      item.gsub(/\$/, "")
+      item.gsub!(/\$/, "")
     end
   end
 
   def set_target(raw_data_array)
     target_string = raw_data_array.shift
     $target = target_string.to_f
-    p $target
   end
 
   def load_data(menu_data_array)
@@ -35,6 +34,13 @@ class Menu
       all_items << Item.new({description: item_array[0], price: item_array[1].to_f.round(2)})
     end
     @items = self.sort_by_price(all_items)
+  end
+
+  def get_data_from_file(filename)
+    data_array = load_file(filename)
+    remove_dollar_sign(data_array)
+    set_target(data_array)
+    load_data(data_array)
   end
 
   def sort_by_price(array)
