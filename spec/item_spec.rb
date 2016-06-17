@@ -2,6 +2,7 @@ require_relative('../item')
 
 describe 'Creates an item' do
   item = Item.new({description: "salad", price: 5.99})
+
   it 'initializes an item' do
   expect(item.is_a?(Object)).to eq true
   end
