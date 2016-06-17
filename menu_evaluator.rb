@@ -4,6 +4,8 @@
 
 require_relative "item"
 require_relative "menu"
+#filename = 'menu.txt'
+filename = ARGV[0]
 $target = 0
 
 # status = false
@@ -47,7 +49,9 @@ menu = Menu.new
 # menu_item_test = "french fries,$2.75"
 # #p menu.remove_dollar_sign(menu_item_test)
 
-test_me = ["15.05", "mixed fruit,2.15", "french fries,2.75"]
-menu.set_target(test_me)
-p test_me
-p menu.load_data(test_me)
+# test_me = ["15.05", "mixed fruit,2.15", "french fries,2.75"]
+# menu.set_target(test_me)
+# p test_me
+# p menu.load_data(test_me)
+menu.get_data_from_file(filename)
+menu.pretty_print
