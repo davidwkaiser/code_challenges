@@ -75,20 +75,24 @@ class Menu
 
   def pretty_print
     array_of_arrays = solve_without_dupes
-    counter = 1
-    puts '*****'
-    array_of_arrays.each do |array_of_objects|
-      puts "solution number - #{counter}"
-      puts "------"
-      array_of_objects.each do |item|
-        printf " $%.2f \t #{item.description} \n", item.price
-
-      end # end for inner do-loop
-      puts "------"
-      puts "$#{TARGET}"
-      puts
-      counter +=1
-    end  #end for outer do-loop
+    unless array_of_arrays
+      printf "There are no solutions that add up to $%.2f \n", TARGET
+    else
+      counter = 1
+      puts '*****'
+      array_of_arrays.each do |array_of_objects|
+        puts "solution number - #{counter}"
+        puts "------"
+        array_of_objects.each do |item|
+          printf " $%.2f \t #{item.description} \n", item.price
+        end # end for inner do-loop
+        puts "------"
+        #puts "$#{TARGET}"
+        printf "$%.2f \n", TARGET
+        puts
+        counter +=1
+      end  #end for outer do-loop
+    end #end of if-statement
   end #end for method
 
 end
