@@ -28,11 +28,11 @@ class Menu
     p $target
   end
 
-
-  def load_data(data)
+  def load_data(menu_data_array)
     all_items = []
-    data.each do |item|
-      all_items << Item.new({description: item[0], price: item[1].to_f.round(2)})
+    menu_data_array.each do |item|
+      item_array = item.split(',')
+      all_items << Item.new({description: item_array[0], price: item_array[1].to_f.round(2)})
     end
     @items = self.sort_by_price(all_items)
   end

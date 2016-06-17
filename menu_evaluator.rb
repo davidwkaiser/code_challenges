@@ -49,3 +49,5 @@ menu = Menu.new
 
 test_me = ["15.05", "mixed fruit,2.15", "french fries,2.75"]
 menu.set_target(test_me)
+p test_me
+p menu.load_data(test_me)
