@@ -4,7 +4,8 @@
 
 require_relative "item"
 require_relative "menu"
-filename = 'menu.txt'
+#filename = 'menu.txt'
+filename = ARGV[0]
 $target = 0
 
 # status = false
