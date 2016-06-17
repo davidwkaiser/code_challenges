@@ -113,7 +113,6 @@ class Menu
           printf " $%.2f \t #{item.description} \n", item.price
         end # end for inner do-loop
         puts "------"
-        #puts "$#{$target}"
         printf "$%.2f \n", $target
         puts
         counter +=1
