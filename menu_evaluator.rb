@@ -4,24 +4,26 @@
 
 require_relative "item"
 require_relative "menu"
-#require_relative "data"
+TARGET = 0
 
-status = false
-final_order = []
-TARGET = 15.05
-DATA = [
-["mixed fruit", 2.15],
-["french fries", 2.75],
-["side salad", 3.35],
-["hot wings", 3.55],
-["mozzarella sticks", 4.20],
-["sampler plate", 5.80],
-]
+# status = false
+# final_order = []
+
+# TARGET = 15.05
+# DATA = [
+# ["mixed fruit", 2.15],
+# ["french fries", 2.75],
+# ["side salad", 3.35],
+# ["hot wings", 3.55],
+# ["mozzarella sticks", 4.20],
+# ["sampler plate", 5.80],
+# ]
 
 
 
 menu = Menu.new
-menu.load_data(DATA)
+#menu.load_data(DATA)
+
 #final_order = menu.solve(target, order = [])
 #puts "the final order is"
 #final_order.each {|item| puts item}
@@ -39,4 +41,10 @@ menu.load_data(DATA)
 #   p variant
 #   p "***"
 # end
-menu.pretty_print
+
+#menu.pretty_print
+file = "menu.txt"
+menu.load_file(file)
+puts
+menu_item_test = "french fries,$2.75"
+#p menu.remove_dollar_sign(menu_item_test)

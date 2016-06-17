@@ -1,5 +1,3 @@
-require 'csv'
-
 class Menu
   attr_reader :file, :items
 
@@ -7,6 +5,28 @@ class Menu
     #@file = file
     @items = []
   end
+
+  def load_file(filename)
+    raw_file_data = []
+    f = File.open(filename, "r")
+    f.each_line do |line|
+      raw_file_data << line.chomp
+    end
+    f.close
+    p raw_file_data
+  end
+
+  def remove_dollar_sign(line)
+    line.gsub(/\$/, "")
+  end
+
+  def set_target(raw_file_data)
+
+
+  end
+
+
+
 
   def load_data(data)
     all_items = []
